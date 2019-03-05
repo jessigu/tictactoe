@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    background-color: #82adf2;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.menu {
+    text-align: center;
+    width: 90%;
+}
+
+.square {
+    width: 30%;
+    height: 20vh;
+    font-size: 45px;
+    background: #a5abb7;
+    border: 4px solid black;
+    float: left;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 125px;
+}
+
+.button {
+    border: 2px solid black;
+    font-weight: bold;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    background: #a5abb7;
+}
