@@ -4,6 +4,7 @@ import Square from './Square';
 import Reset from './Reset';
 import Winner from './Winner';
 import Select from './Select';
+import Score from './Score';
 
 class App extends Component {
     constructor(props){
@@ -21,12 +22,14 @@ class App extends Component {
                 [2,5,8],
                 [0,4,8],
                 [2,4,6]
-            ]
+            ],
+            oWin: 0,
+            xWin: 0
         }
     }
 
     playGame = (index) => {
-        const {board, turn, winner, winning} = this.state;
+        const {board, turn, winner, winning, xWin, oWin} = this.state;
         if (turn === null) {
             return;
         }
@@ -39,6 +42,11 @@ class App extends Component {
             for(let i = 0; i < winning.length; i++){
             const [a, b, c] = winning[i];
                 if(board[a] && board[a] === board[b] && board[a] === board[c]){
+                    if (board[a] === 'X') {
+                        this.setState({xWin: xWin+1})
+                    } else if (board[a] === 'O') {
+                        this.setState({oWin: oWin+1})
+                    }
                     this.setState({winner: board[a]});
                 }
             }
@@ -64,7 +72,7 @@ class App extends Component {
     }
 
   render() {
-    const { board, turn, winner } = this.state
+    const { board, turn, winner, xWin, oWin } = this.state
     return (
       <div className="container">
         <div className="menu" >
@@ -91,6 +99,7 @@ class App extends Component {
             winner = {winner}
             />
             <Reset restart={this.resetGame} win={winner}/>
+            <Score xWin={xWin} oWin={oWin}/>
         </div>
       </div>
     );
