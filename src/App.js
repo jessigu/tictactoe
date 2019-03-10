@@ -27,31 +27,27 @@ class App extends Component {
             xWin: 0
         }
     }
-
+//refactor into multiple functions... DRY + 1 task/function
     playGame = (index) => {
         const {board, turn, winner, winning, xWin, oWin} = this.state;
         if (turn === null) {
             return;
         }
-        let boardCopy = board
         if(winner === null){
             if(board[index] === "") {
-             boardCopy.splice(index, 1, turn)
-             this.setState({board: boardCopy, turn: (turn === 'X') ? 'O' : 'X'})
+             board[index] = turn
+             this.setState({board: board, turn: (turn === 'X') ? 'O' : 'X'})
             }
             for(let i = 0; i < winning.length; i++){
-            const [a, b, c] = winning[i];
+              //get rid of for loop
+              //move winning array to function or leave in state?
+              const [a, b, c] = winning[i];
                 if(board[a] && board[a] === board[b] && board[a] === board[c]){
-                    if (board[a] === 'X') {
-                        this.setState({xWin: xWin+1})
-                    } else if (board[a] === 'O') {
-                        this.setState({oWin: oWin+1})
-                    }
-                    this.setState({winner: board[a]});
+                    turn === 'X' ? this.setState({xWin: xWin+1}) : this.setState({oWin: oWin+1})
+                    this.setState({winner: turn});
                 }
             }
-            let total = board.join('')
-                if (total.length === 9){
+                if (board.join('').length === 9){
                 this.setState({winner: 'draw'})
             }
         }
